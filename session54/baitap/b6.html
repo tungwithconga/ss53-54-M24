@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function isPrime(number) {
+            return new Promise((resolve, reject) => {
+                if (!Number.isInteger(number)) {
+                    reject("Số không phải là số nguyên");
+                    return;
+                }
+                
+                if (number <= 1) {
+                    resolve(false);
+                }
+        
+                if (number <= 3) {
+                    resolve(true); 
+                }
+        
+                for (let i = 2; i <= Math.sqrt(number); i++) {
+                    if (number % i === 0) {
+                        resolve(false);
+                    }
+                }
+                resolve(true);
+            });
+        }
+        
+        async function isPrimeWithAsyncAwait(number) {
+            try {
+                const result = await isPrime(number);
+                return result;
+            } catch (error) {
+                throw new Error(error);
+            }
+        }
+        
+        (async () => {
+            try {
+                console.log(await isPrimeWithAsyncAwait(2));  
+                console.log(await isPrimeWithAsyncAwait(3));  
+                console.log(await isPrimeWithAsyncAwait(4));  
+            } catch (error) {
+                console.error(error.message);
+            }
+        })();
+
+    </script>
+</body>
+</html>

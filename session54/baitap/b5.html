@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function isPrimeWithPromise(number) {
+        return new Promise((resolve, reject) => {
+            if (!Number.isInteger(number)) {
+                reject("Khong phai so nguyen");
+                return;
+            }
+            
+            if (number <= 1) {
+                resolve(false);
+            }
+    
+            if (number <= 3) {
+                resolve(true); 
+            }
+    
+            for (let i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i === 0) {
+                    resolve(false); 
+                }
+            }
+            resolve(true);
+        });
+    }
+    isPrimeWithPromise(2)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    
+    isPrimeWithPromise(3)
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    
+    isPrimeWithPromise(4)
+        .then(result => {
+            console.log(result); 
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    </script>
+</body>
+</html>

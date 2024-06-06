@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <!-- 
+            Đồng bộ và bất đồng bộ
+            
+    Đồng bộ: synchronous
+             Ngôn ngữ javascript là 1 ngôn ngữ đơn luồng (single-thread): chỉ 1 luồng duy
+             nhất, luồng code: chạy từ trái qua phải và từ trên xuống dưới
+    Bất đồng bộ: asynchronous
+    Những việc cần thời gian xử lí như các hàm settimeout, setInterval, readfile,
+        writefile, gửi request lên server, các thao tác tương tác database
+        Trong JS sinh ra các cách để xử lý các tác vụ bất đồng bộ
+    Đúng callback
+         callback là gì?
+         callback là 1 hàm được truyền vào làm đối số của hàm khác
+    promise
+    async-await
+    -->
+    </body><script>// console.log("công việc 1");// setTimeout(()=>{//     console.log("công việc 2");// },0)// console.log("công việc 3");
+     function task1(a){// cần thời gian đi xử lí công việc// ví dụ công việc 1 cần 2s để thực thi
+         setTimeout(()=>{
+             console.log("công việc 1 dc thực hiện");
+             a();},2000)}
+     function task2(){
+         console.log("được thực thi sau khi tác 1 hoàn thành");}// task1(task2);
+     setTimeout(()=>{
+         console.log("công việc 1 thực thi");
+         setTimeout(()=>{
+             console.log("công việc 2 sau công việc 1");
+             setTimeout(()=>{
+                 console.log("công việc 3 sau công việc 2");},7000)},3000)},1000)// khi viết nhiều hàm xử lý lồng nhay thì sẽ rơi vào tình trạng callback hell
+    
+        let arr=[1,2,3,4,5];
+        // arr.map((item)=>{
+        //     return item2;
+        // })
+        function myMap(a,b){
+            let result = [];
+            for(const item of a){
+                result.push(b(item));
+            }
+            return result;
+        }
+        myMap(arr,(item)=>item*2);
+        //dùng callback để custom lại hàm filter-lọc
+        let result1=arr.filter((item)=>item>5);
+        console.log("seresult1",result1);
+        function myFilter(array,callback){
+            let result = [];
+            for(const item of array){
+                if(callback(item)){
+                    result.push(item);
+                }
+            }
+            return result;
+        }
+      </script>
+
+</body>
+</html> 

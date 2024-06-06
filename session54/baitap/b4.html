@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sumWithPromise(numbers) {
+            return new Promise((resolve, reject) => {
+                if (!Array.isArray(numbers) || !numbers.every(num => typeof num === 'number')) {
+                    reject("Mảng phải chứa số nguyên");
+                    return;
+                }
+                const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+                resolve(sum);
+            });
+        }
+        async function sumWithAsyncAwait(numbers) {
+            try {
+                const sum = await sumWithPromise(numbers);
+                return sum;
+            } catch (error) {
+                throw new Error(error);
+            }
+        }
+        (async () => {
+            try {
+                const result = await sumWithAsyncAwait([1, 2, 3, 4, 5, 6, 7]);
+                console.log(result);
+            } catch (error) {
+                console.error(error.message);
+            }
+        })();
+    </script>
+</body>
+</html>
